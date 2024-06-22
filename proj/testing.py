@@ -1,5 +1,5 @@
 import unittest
-from youtubeproj import channel, search, populate_dict, videos
+from proj/youtubeproj import channel, search, populate_dict, videos
 
 class TestFileName(unittest.TestCase):
     def test_channel(self):
