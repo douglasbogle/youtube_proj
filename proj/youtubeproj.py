@@ -3,7 +3,7 @@ import pprint
 import pandas as pd
 import sqlalchemy as db
 import html
-from key.py import get_key
+from key import get_key
 
 API_KEY = get_key()  
 
@@ -38,7 +38,7 @@ def search(id=None, query=None):
   params_search = {
     'part': PART_POPULAR,
     'order': ORDER,
-    'maxResults': 10,
+    'maxResults': 20,
     'type': TYPE,
     'key': API_KEY,
   }
@@ -46,7 +46,7 @@ def search(id=None, query=None):
   if query:
     params_search['q'] = 'Q'
   if id:
-    params_search['channelId': CHANNEL_ID]
+    params_search['channelId'] = CHANNEL_ID
 
   SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 
@@ -75,7 +75,7 @@ def populate_dict(info):
 #[]
 #None
 def videos(video_dict):
-  if not isinstance(info, dict):
+  if not isinstance(video_dict, dict):
     raise Exception("Please enter a dictionary")
 
   ids = []
