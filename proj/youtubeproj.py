@@ -9,6 +9,7 @@ import html
 load_dotenv()
 API_KEY = os.getenv('YOUTUBE_API_KEY')  
 
+
 # test cases with possible errors:
 # channel_name = '1@!'
 # NonexistentChannel
@@ -29,13 +30,13 @@ def channel(channel_name='Minecraft'):
 
     if 'items' not in channel_dict:
         return KeyError
-  
-    return channel_dict['items'][0]['id'] # should return channel's id
+
+    return channel_dict['items'][0]['id']. # should return channel's id
 
 
-#test cases with possible errors:
-#'notID'
-#None, None
+# test cases with possible errors:
+# 'notID'
+# None, None
 def search(id=None, query=None):
     ORDER = 'viewCount'
     PART_POPULAR = 'snippet'
@@ -84,14 +85,14 @@ def populate_dict(info):
     sql_dict = {}
 
     for i in range(len(info['items'])):  
-        # make a dict mapping video titles to their video id's and date published
+        # make a dict mapping video titles to their info
         curr_dict = info['items'][i]
         sql_dict[html.unescape(curr_dict['snippet']['title'])] = \
-        [curr_dict['id']['videoId'], curr_dict['snippet']['publishedAt']]
+            [curr_dict['id']['videoId'], curr_dict['snippet']['publishedAt']]
         # use this html method to avoid errors caused by accidental html chars
 
     return sql_dict 
-    # should return a dictionary mapping video titles to their id and date uploaded
+    # should return a dictionary mapping video titles to their info
 
 # test cases with possible errors:
 # []
@@ -137,7 +138,7 @@ def make_db(final_dict=None):
     if not final_dict:
         return None
 
-    df = pd.DataFrame.from_dict(final_dict, orient = 'index') # nice
+    df = pd.DataFrame.from_dict(final_dict, orient='index') # nice
 
     engine = db.create_engine('sqlite:///ytinfo.db')
 
