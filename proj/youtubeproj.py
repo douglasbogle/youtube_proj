@@ -123,20 +123,23 @@ def videos(video_dict):
 
   return video_dict # should add video view counts to already nicely formmated dict
 
+def make_db(final_dict=None):
+  if not final_dict:
+    return None
+
+  df = pd.DataFrame.from_dict(final_dict, orient = 'index') # nice
+
+  engine = db.create_engine('sqlite:///ytinfo.db')
+
+  df.to_sql('final_dict', con=engine, if_exists='replace', index=False)
+
+  with engine.connect() as connection:
+      query_result = connection.execute(db.text("SELECT * FROM final_dict;")).fetchall()
+      print(pd.DataFrame(query_result))
+
 channel_name = 'FryingPan'
 id = channel(channel_name)
 search_result = search(id)
 formatted_dict = populate_dict(search_result)
 final_dict = videos(formatted_dict) 
-pprint.pprint(final_dict)
-
-
-df = pd.DataFrame.from_dict(final_dict, orient = 'index') # nice
-
-engine = db.create_engine('sqlite:///ytinfo.db')
-
-df.to_sql('final_dict', con=engine, if_exists='replace', index=False)
-
-with engine.connect() as connection:
-   query_result = connection.execute(db.text("SELECT * FROM final_dict;")).fetchall()
-   print(pd.DataFrame(query_result))
+make_db(final_dict)
