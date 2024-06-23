@@ -9,13 +9,6 @@ import html
 load_dotenv()
 API_KEY = os.getenv('YOUTUBE_API_KEY')  
 
-def get_channel_name():
-  try:
-    channel_name = input("Please enter channel name: ")
-  except EOFError:
-    channel_name = 'Minecraft'
-  return channel_name
-
 #test cases with possible errors:
 #channel_name = '1@!'
 #NonexistentChannel
@@ -130,7 +123,7 @@ def videos(video_dict):
 
   return video_dict # should add video view counts to already nicely formmated dict
 
-channel_name = get_channel_name()
+channel_name = 'FryingPan'
 id = channel(channel_name)
 search_result = search(id)
 formatted_dict = populate_dict(search_result)
