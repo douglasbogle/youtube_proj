@@ -13,7 +13,7 @@ API_KEY = os.getenv('YOUTUBE_API_KEY')
 # test cases with possible errors:
 # channel_name = '1@!'
 # NonexistentChannel
-def channel(channel_name='Minecraft'): 
+def channel(channel_name='Minecraft'):
     # If none entered or unittesting just use Minecraft channel
     PART_CHANNEL = 'contentDetails'
     USERNAME = channel_name
@@ -141,7 +141,7 @@ def make_db(final_dict=None):
     if not final_dict:
         return None
 
-    df = pd.DataFrame.from_dict(final_dict, orient='index') # nice
+    df = pd.DataFrame.from_dict(final_dict, orient='index')  # nice
 
     engine = db.create_engine('sqlite:///ytinfo.db')
 
