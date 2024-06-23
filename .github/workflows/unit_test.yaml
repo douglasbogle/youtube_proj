@@ -15,5 +15,9 @@ jobs:
       - name: Install tools
         run: python -m pip install --upgrade pip pytest requests pandas sqlalchemy python-dotenv 
 
+      - name: Let GitHub access key
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.API_KEY }}  
+
       - name: Test with unittest
         run: python3 -m unittest proj/testing.py
