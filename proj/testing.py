@@ -7,8 +7,7 @@ class TestFileName(unittest.TestCase):
           channel('1@!')
 
     def test_search(self):
-      with self.asserRaises(invalidChannelId):
-        search('1@!')
+      self.assertEqual('1@!', None)
 
     def test_populate_dict(self):
         self.assertEqual(populate_dict({}), {})
@@ -20,7 +19,7 @@ class TestFileName(unittest.TestCase):
     def test_videos(self):
         self.assertEqual(videos({}), {})
         with self.assertRaises(Exception):
-          populate_dict('[]'), 
+          videos('[]'), 
         
 if __name__ == '__main__':
     unittest.main()

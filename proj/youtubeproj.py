@@ -32,7 +32,13 @@ def channel(channel_name='Minecraft'): # If none entered or unittesting just use
 
   channel_info = requests.get(CHANNEL_URL, params=params_channel)
   channel_dict = channel_info.json()
+
+  if 'items' not in channel_dict:
+    raise KeyError
+  
   return channel_dict['items'][0]['id'] # should return channel's id
+  
+    
 
 #test cases with possible errors:
 #'notID'
@@ -59,7 +65,11 @@ def search(id=None, query=None):
 
   SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 
-  search_result = requests.get(SEARCH_URL, params=params_search)
+  try:
+    search_result = requests.get(SEARCH_URL, params=params_search)
+  except invalidChannelId:
+    return None
+
   search_dict = search_result.json()
 
   return search_dict # should return a dict full of responses from youtubedata api search
@@ -70,6 +80,9 @@ def search(id=None, query=None):
 def populate_dict(info):
   if not isinstance(info, dict):
     raise Exception("Please enter a dictionary")
+
+  if 'items' not in info:
+    raise KeyError
 
   sql_dict = {}
 
