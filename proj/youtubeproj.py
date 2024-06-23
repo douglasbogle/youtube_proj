@@ -7,7 +7,7 @@ import sqlalchemy as db
 import html
 
 load_dotenv()
-API_KEY = os.getenv('YOUTUBE_API_KEY')  
+API_KEY = os.getenv('YOUTUBE_API_KEY') 
 
 
 # test cases with possible errors:
@@ -31,7 +31,7 @@ def channel(channel_name='Minecraft'):
     if 'items' not in channel_dict:
         return KeyError
 
-    return channel_dict['items'][0]['id']. # should return channel's id
+    return channel_dict['items'][0]['id']  # should return channel's id
 
 
 # test cases with possible errors:
@@ -72,6 +72,7 @@ def search(id=None, query=None):
     return search_dict 
     # should return a dict full of responses from youtubedata api search
 
+
 # test cases with possible errors:
 # []
 # None
@@ -94,6 +95,7 @@ def populate_dict(info):
     return sql_dict 
     # should return a dictionary mapping video titles to their info
 
+
 # test cases with possible errors:
 # []
 # None
@@ -106,7 +108,7 @@ def videos(video_dict):
         ids.append(video_dict[key][0])
 
     id_string = ','.join(ids)
-  
+
     ID = id_string
     PART = 'snippet', 'statistics'
 
@@ -146,7 +148,7 @@ def make_db(final_dict=None):
 
     with engine.connect() as connection:
         query_result = \
-        connection.execute(db.text("SELECT * FROM final_dict;")).fetchall()
+            connection.execute(db.text("SELECT * FROM final_dict;")).fetchall()
         print(pd.DataFrame(query_result))
 
 
