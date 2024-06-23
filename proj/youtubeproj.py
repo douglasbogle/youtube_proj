@@ -7,7 +7,7 @@ import sqlalchemy as db
 import html
 
 load_dotenv()
-API_KEY = os.getenv('YOUTUBE_API_KEY') 
+API_KEY = os.getenv('YOUTUBE_API_KEY')
 
 
 # test cases with possible errors:
@@ -61,7 +61,7 @@ def search(id=None, query=None):
 
     try:
         search_result = requests.get(SEARCH_URL, params=params_search)
-    except Exception as e: # Bad Request
+    except Exception as e:  # Bad Request
         return None
 
     search_dict = search_result.json()
@@ -122,7 +122,7 @@ def videos(video_dict):
 
     video_stats = requests.get(VIDEOS_URL, params=params_videos)
     video_info = video_stats.json()
-  
+
     for item in video_info['items']:
         curr_title = html.unescape(item['snippet']['title']) 
         # use this html method to avoid errors caused by accidental html chars
@@ -135,6 +135,7 @@ def videos(video_dict):
 
     return video_dict 
     # should add video view counts to already nicely formmated dict
+
 
 def make_db(final_dict=None):
     if not final_dict:
