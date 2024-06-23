@@ -1,11 +1,13 @@
+import os
+from dotenv import load_dotenv
 import requests
 import pprint
 import pandas as pd
 import sqlalchemy as db
 import html
-from key import get_key
 
-API_KEY = get_key()  
+load_dotenv()
+API_KEY = os.getenv('YOUTUBE_API_KEY')  
 
 #test cases with possible errors:
 #channel_name = '1@!'
