@@ -8,3 +8,9 @@
 
 Given a youtube channel username, this project grabs their most popular videos
 and attempts to do stuff with this info.
+
+![example workflow]
+(https://github.com/github/docs/actions/workflows/check_style.yml/badge.svg)
+
+![example workflow]
+(https://github.com/github/docs/actions/workflows/unit_test.yml/badge.svg)

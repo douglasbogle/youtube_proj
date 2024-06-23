@@ -9,10 +9,10 @@ import html
 load_dotenv()
 API_KEY = os.getenv('YOUTUBE_API_KEY')  
 
-#test cases with possible errors:
-#channel_name = '1@!'
-#NonexistentChannel
-def channel(channel_name='Minecraft'): # If none entered or unittesting just use Minecraft channel
+# test cases with possible errors:
+# channel_name = '1@!'
+# NonexistentChannel
+def channel(channel_name='Minecraft'):  # If none entered or unittesting just use Minecraft channel
   PART_CHANNEL = 'contentDetails'
   USERNAME = channel_name
 
@@ -59,10 +59,13 @@ def search(id=None, query=None):
 
   try:
     search_result = requests.get(SEARCH_URL, params=params_search)
-  except invalidChannelId:
+  except Exception as e: # Bad Request
     return None
 
   search_dict = search_result.json()
+
+  if(search_dict['error']['code'] // 100 != 2): # Bad Request
+    return None
 
   return search_dict # should return a dict full of responses from youtubedata api search
 
@@ -78,7 +81,7 @@ def populate_dict(info):
 
   sql_dict = {}
 
-  for i in range(len(info['items'])): # make a dict mapping video titles to their video id's and date published
+  for i in range(len(info['items'])):  # make a dict mapping video titles to their video id's and date published
     curr_dict = info['items'][i]
     sql_dict[html.unescape(curr_dict['snippet']['title'])] = [curr_dict['id']['videoId'], curr_dict['snippet']['publishedAt']]
     # use this html method to avoid errors caused by accidental html chars
@@ -137,7 +140,8 @@ def make_db(final_dict=None):
       query_result = connection.execute(db.text("SELECT * FROM final_dict;")).fetchall()
       print(pd.DataFrame(query_result))
 
-channel_name = 'FryingPan'
+
+channel_name = 'FryingPan' # For now, specify channel name here, can unit test by making this wacky
 id = channel(channel_name)
 search_result = search(id)
 formatted_dict = populate_dict(search_result)
