@@ -3,19 +3,24 @@ from proj.youtubeproj import channel, search, populate_dict, videos
 
 class TestFileName(unittest.TestCase):
     def test_channel(self):
-        self.assertRaises(channel('1@!'), KeyError)
+        with self.assertRaises(KeyError):
+          channel('1@!')
 
     def test_search(self):
-        self.assertRaises(search('1@!'), invalidChannelId)
+      with self.asserRaises(invalidChannelId):
+        search('1@!')
 
     def test_populate_dict(self):
         self.assertEqual(populate_dict({}), {})
-        self.assertRaises(populate_dict('[]'), Exception)
-        self.assertRaises(populate_dict({'bad' : 'input'}), KeyError)
+        with self.assertRaises(KeyError):
+          populate_dict({'bad' : 'input'})
+        with self.assertRaises(Exception):
+          populate_dict('[]')
 
     def test_videos(self):
-        self.assertRaises(populate_dict('[]'), Exception)
         self.assertEqual(videos({}), {})
-      
+        with self.assertRaises(Exception):
+          populate_dict('[]'), 
+        
 if __name__ == '__main__':
     unittest.main()
