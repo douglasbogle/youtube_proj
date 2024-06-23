@@ -34,11 +34,10 @@ def channel(channel_name='Minecraft'): # If none entered or unittesting just use
   channel_dict = channel_info.json()
 
   if 'items' not in channel_dict:
-    raise KeyError
+    return KeyError
   
   return channel_dict['items'][0]['id'] # should return channel's id
-  
-    
+
 
 #test cases with possible errors:
 #'notID'
@@ -79,10 +78,10 @@ def search(id=None, query=None):
 #None
 def populate_dict(info):
   if not isinstance(info, dict):
-    raise Exception("Please enter a dictionary")
+    return None
 
   if 'items' not in info:
-    raise KeyError
+    return KeyError
 
   sql_dict = {}
 
@@ -98,7 +97,7 @@ def populate_dict(info):
 #None
 def videos(video_dict):
   if not isinstance(video_dict, dict):
-    raise Exception("Please enter a dictionary")
+    return None
 
   ids = []
   for key in video_dict.keys():
