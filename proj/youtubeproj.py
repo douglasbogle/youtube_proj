@@ -77,7 +77,7 @@ def search(id=None, query=None):
 #[]
 #None
 def populate_dict(info):
-  if not isinstance(info, dict):
+  if not isinstance(info, dict) or not info:
     return None
 
   if 'items' not in info:
@@ -96,7 +96,7 @@ def populate_dict(info):
 #[]
 #None
 def videos(video_dict):
-  if not isinstance(video_dict, dict):
+  if not isinstance(video_dict, dict) or not video_dict:
     return None
 
   ids = []
