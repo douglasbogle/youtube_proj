@@ -13,7 +13,7 @@ class TestFileName(unittest.TestCase):
         self.assertEqual(populate_dict({}), None)
         self.assertEqual(populate_dict({'bad': 'input'}), KeyError)
         self.assertEqual(populate_dict('[]'), None)
-  
+
     def test_videos(self):
         self.assertEqual(videos({}), None)
         self.assertEqual(videos('[]'), None)

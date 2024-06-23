@@ -9,8 +9,8 @@
 Given a youtube channel username, this project grabs their most popular videos
 and attempts to do stuff with this info.
 
-![example workflow]
-(https://github.com/github/docs/actions/workflows/check_style.yml/badge.svg)
+![check style]
+(https://github.com/douglasbogle/youtube_proj/actions/workflows/check_style.yaml/badge.svg)
 
-![example workflow]
-(https://github.com/github/docs/actions/workflows/unit_test.yml/badge.svg)
+![unit test]
+(https://github.com/douglasbogle/youtube_proj/actions/workflows/unit_test.yaml/badge.svg)
