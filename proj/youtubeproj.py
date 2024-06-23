@@ -69,7 +69,7 @@ def search(id=None, query=None):
     if ('error' in search_dict):  # Bad Request
         return None
 
-    return search_dict 
+    return search_dict
     # should return a dict full of responses from youtubedata api search
 
 
@@ -85,14 +85,14 @@ def populate_dict(info):
 
     sql_dict = {}
 
-    for i in range(len(info['items'])):  
+    for i in range(len(info['items'])):
         # make a dict mapping video titles to their info
         curr_dict = info['items'][i]
         sql_dict[html.unescape(curr_dict['snippet']['title'])] = \
             [curr_dict['id']['videoId'], curr_dict['snippet']['publishedAt']]
         # use this html method to avoid errors caused by accidental html chars
 
-    return sql_dict 
+    return sql_dict
     # should return a dictionary mapping video titles to their info
 
 
@@ -124,7 +124,7 @@ def videos(video_dict):
     video_info = video_stats.json()
 
     for item in video_info['items']:
-        curr_title = html.unescape(item['snippet']['title']) 
+        curr_title = html.unescape(item['snippet']['title'])
         # use this html method to avoid errors caused by accidental html chars
         curr_views = item['statistics']['viewCount']
 
@@ -133,7 +133,7 @@ def videos(video_dict):
     else:
         raise Exception("Something bad happened")
 
-    return video_dict 
+    return video_dict
     # should add video view counts to already nicely formmated dict
 
 
@@ -153,10 +153,10 @@ def make_db(final_dict=None):
         print(pd.DataFrame(query_result))
 
 
-channel_name = 'FryingPan'  
+channel_name = 'FryingPan'
 # For now, specify channel name here, can unit test by making this wacky
 id = channel(channel_name)
 search_result = search(id)
 formatted_dict = populate_dict(search_result)
-final_dict = videos(formatted_dict) 
+final_dict = videos(formatted_dict)
 make_db(final_dict)
